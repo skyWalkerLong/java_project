@@ -7,7 +7,9 @@ package designPattern.factoryPattern;
 public class TestReflect {
 
     public static void main(String[] args) {
-        JavaLanguage j = (JavaLanguage) ReflectFactory.getCalss(JavaLanguage.class);
+        JavaLanguage j = (JavaLanguage)ReflectFactory.getCalss(JavaLanguage.class);
         j.write();
+        CplusLanguage c = (CplusLanguage)ReflectFactory.getCalss(CplusLanguage.class);
+        c.write();
     }
 }
