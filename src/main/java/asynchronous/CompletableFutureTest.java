@@ -12,6 +12,7 @@ public class CompletableFutureTest {
         int b = 3;
         try {
             long startTime = System.currentTimeMillis();
+            //实际项目中创建多线程执行提高查询效率
             CompletableFuture<Object> baseInfo = CompletableFuture.supplyAsync(() -> test(a));//启动第一个线程执行方法
 
             CompletableFuture<Object> timeInfo = CompletableFuture.supplyAsync(() -> test(b));//启动第二个线程执行方法
