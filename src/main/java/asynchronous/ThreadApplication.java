@@ -10,6 +10,7 @@ public class ThreadApplication {
     public static void main(String[] args) {
         System.out.println("111");
         CountDownLatch countDownLatch = new CountDownLatch(2);//等待多少个线程
+        //实际项目中不建议使用new的方式来创建线程，spring中通过线程池来创建线程，线程池只要配置一下就可以使用
         new Thread(new Runnable() {
             @Override
             public void run() {
