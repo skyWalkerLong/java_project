@@ -3,7 +3,9 @@ package lambda;
 import com.google.common.collect.Lists;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author longchao
@@ -25,6 +27,9 @@ public class Loop {
 
         //双冒号操作符
         list.forEach(System.out::println);
+
+
+
     }
 
 

@@ -2,10 +2,12 @@ package lambda.stream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 /**
  * @Author longchao
@@ -62,7 +64,18 @@ public class LambdaAndStream {
         /**
          * 根据工资排序
          */
-        sortBySalary(javaProgrammers);
+        //sortBySalary(javaProgrammers);
+
+        /**
+         * lambda和map结合
+         */
+        //lambdaWithMap(javaProgrammers);
+
+        /**
+         * anyMatch
+         */
+        anyMatch(javaProgrammers);
+
     }
 
     /**
@@ -119,5 +132,46 @@ public class LambdaAndStream {
                 .max((p,p2) -> (p.getSalary() - p2.getSalary())).get();
 
         System.out.println(maxPerson + "  " +minPerson);
+    }
+
+    /**
+     * lambda和map结合
+     * @param javaProgrammers
+     */
+    public static void lambdaWithMap(List<Person> javaProgrammers) {
+        /**
+         * 将javaDevelopers的firstName拼成字符串
+         */
+        String javaDevelopers = javaProgrammers.stream()
+                .map(Person::getFirstName)
+                .collect(joining(" ; "));
+        System.out.println(javaDevelopers);
+
+        /**
+         * 将javaDevelopers的firstName存放到Set中
+         */
+        Set<String> javaDevFirstName = javaProgrammers.stream()
+                .map(Person::getFirstName)
+                .collect(toSet());
+        System.out.println(javaDevFirstName);
+
+        /**
+         * 将javaDevelopers的firstName存放到treeSet中
+         */
+        TreeSet<String> javaDevLastName = javaProgrammers.stream()
+                .map(Person::getLastName)
+                .collect(toCollection(TreeSet::new));
+        System.out.println(javaDevLastName);
+
+        /**
+         * 并发
+         */
+        javaDevLastName.parallelStream().forEach(p -> System.out.print(p));
+    }
+
+    public static void anyMatch(List<Person> javaProgrammers) {
+        Boolean result = javaProgrammers.stream().anyMatch(javaProgrammer ->
+        javaProgrammer.getFirstName().equals("Addison"));
+        System.out.print(result);
     }
 }
