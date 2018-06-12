@@ -31,6 +31,8 @@ public class KafkaConsumer {
         props.put("zookeeper.sync.time.ms","200");
         props.put("auto.commit.interval.ms","1000");
         props.put("auto.offset.reset","smallest");
+        props.put("max.poll.interval.ms",3000);
+        props.put("max.poll.records",3);
 
         props.put("serializer.class","kafka.serializer.StringEncoder");
 
@@ -40,7 +42,7 @@ public class KafkaConsumer {
     }
 
 
-    void consume(){
+    void consume() throws InterruptedException {
         Map<String,Integer> topicCountMap=new HashMap<String, Integer>();
         topicCountMap.put(KafkaConsumer.TOPIC,new Integer(1));
         StringDecoder keyDecoder=new StringDecoder(new VerifiableProperties());
@@ -48,7 +50,6 @@ public class KafkaConsumer {
 
         Map<String,List<KafkaStream<String,String>>> consumerMap=
                 consumer.createMessageStreams(topicCountMap,keyDecoder,valueDecoder);
-
         KafkaStream<String,String> stream=consumerMap.get(KafkaConsumer.TOPIC).get(0);
         ConsumerIterator<String,String> it=stream.iterator();
         System.out.println("recive");
@@ -58,7 +59,7 @@ public class KafkaConsumer {
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException {
         new KafkaConsumer().consume();
     }
 }

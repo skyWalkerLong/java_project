@@ -34,7 +34,7 @@ public class KafkaProducer {
         producer = new Producer<String, String>(new ProducerConfig(props));
     }
 
-    void produce() {
+    void produce() throws InterruptedException {
         int messageNo = 1000;
         final int COUNT = 10000;
 
@@ -44,12 +44,12 @@ public class KafkaProducer {
             System.out.println("start");
             producer.send(new KeyedMessage<String, String>(TOPIC, key ,data));
             System.out.println(data);
+            //Thread.sleep(1000);
             messageNo ++;
         }
     }
 
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) throws InterruptedException {
         new KafkaProducer().produce();
     }
 }
