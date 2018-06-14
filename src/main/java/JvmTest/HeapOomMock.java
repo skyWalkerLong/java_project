@@ -15,6 +15,7 @@ public class HeapOomMock {
         while (flag){
             try {
                 i++;
+                Thread.sleep(100);
                 list.add(new byte[1024 * 1024]);//每次增加一个1M大小的数组对象
             }catch (Throwable e){
                 e.printStackTrace();
