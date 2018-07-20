@@ -1,4 +1,4 @@
-package sort;
+package arithmetic.sort;
 
 import org.junit.Test;
 
