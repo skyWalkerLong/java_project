@@ -65,5 +65,25 @@
             <version>0.8.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.15</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.nlpcn/elasticsearch-sql -->
+        <dependency>
+            <groupId>org.nlpcn</groupId>
+            <artifactId>elasticsearch-sql</artifactId>
+            <version>6.2.4.0</version>
+        </dependency>
+
+
     </dependencies>
 </project>
