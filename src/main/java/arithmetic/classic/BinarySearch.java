@@ -34,7 +34,7 @@ public class BinarySearch {
      */
     int bsearchWithoutRecursion(int[] arr,int left,int right,int target) {
         while (left <= right) {
-            int mid = (left + right) / 2;
+            int mid = (right - left) / 2 + left;
             if (arr[mid] > target) {
                 right = mid - 1;
             } else if (arr[mid] < target) {
