@@ -18,7 +18,7 @@ public class BinarySearch {
      * @return
      */
     int bsearch(int[] arr,int left,int right,int target) {
-        int mid = (left + right) / 2;
+        int mid = (right - left) / 2 + left;
         if (arr[mid] > target) return bsearch(arr,left,mid-1,target);
         if (arr[mid] < target) return  bsearch(arr,mid + 1,right,target);
         return mid;
