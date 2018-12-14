@@ -21,4 +21,11 @@ public class TestPO {
     public void setValue(Number value) {
         this.value = value;
     }
+
+    public TestPO() {}
+
+    public TestPO(String name, Number value) {
+        this.name = name;
+        this.value = value;
+    }
 }
