@@ -1,9 +1,11 @@
 package arithmetic.le;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author longchao
@@ -14,19 +16,20 @@ public class TwoSum_1 {
 
     @Test
     public void test() {
-        int[] nums = {2,4,3,1,-3,4,-2,-5};
-        int target = 0;
+        int[] nums = new int[]{3,2,4};
+        int target = 6;
         twoSum(nums,target);
     }
 
     public void twoSum(int[] nums, int target) {
-        List list = Lists.newArrayList();
+        Map<Integer,Integer> map = Maps.newHashMap();
+
         for(int i=0;i<nums.length;i++) {
             int temp = target - nums[i];
-            if (list.contains(temp)) {
-                System.out.println(nums[i] + " "  + temp);
+            if (map.containsKey(temp)) {
+                System.out.println(i+"--"+map.get(temp));
             } else {
-                list.add(nums[i]);
+                map.put(nums[i],i);
             }
         }
     }
