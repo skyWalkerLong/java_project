@@ -1,39 +1,45 @@
 package kafka;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.*;
+import org.apache.kafka.common.Cluster;
+import org.apache.kafka.common.PartitionInfo;
+import org.apache.kafka.common.serialization.IntegerSerializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 public class ProducerFastStart {
-    public static final String brokerList = "39.96.11.146:9092";
-    public static final String topic = "topic-demo";
+    public static final String brokerList = "";
+    public static final String topic = "test";
+
+    public static Properties initConfig(){
+        Properties props = new Properties();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, brokerList);
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+                StringSerializer.class.getName());
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+                StringSerializer.class.getName());
+        props.put(ProducerConfig.CLIENT_ID_CONFIG, "producer.client.id.demo");
+        props.put(ProducerConfig.RETRIES_CONFIG, 3);
+        props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, DemoPartitioner.class.getName());
+        props.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, ProducerInterceptorPrefix.class.getName());
+        return props;
+    }
 
     public static void main(String[] args) {
-        Properties properties = new Properties();
-        properties.put("key.serializer",
-                "org.apache.kafka.common.serialization.StringSerializer");
-        properties.put("value.serializer",
-                "org.apache.kafka.common.serialization.StringSerializer");
-        properties.put("bootstrap.servers", brokerList);
-
-        KafkaProducer<String, String> producer = null;
-        try{
-            producer = new KafkaProducer<>(properties);
-            System.out.print("1");
-            ProducerRecord<String, String> record =
-                    new ProducerRecord<>(topic, "hello, Kafka!");
-            System.out.print("2");
-
-            Future future = producer.send(record);
-            System.out.print("3");
-
-            future.get(1, TimeUnit.SECONDS);
+        Properties props = initConfig();
+        KafkaProducer<String, String> producer = new KafkaProducer<>(props);
+        ProducerRecord<String, String> record =
+                new ProducerRecord<>(topic, "3");
+        try {
+            Future<RecordMetadata> future = producer.send(record);
+            RecordMetadata metadata = future.get();
+            System.out.println(metadata.topic() + "-" + metadata.partition() + "-" + metadata.offset());
         } catch (Exception e) {
-            System.out.print(e);
+            e.printStackTrace();
         }
-
-        producer.close();
     }
 }
