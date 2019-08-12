@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class QuickSort {
     @Test
     public void sort() {
-        int[] a = {2,5,8,4,1,6,9,3,10};
+        int[] a = {39,49,89,97,25,56,13,45};
         int left = 0;
         int right = a.length - 1;
         quickSort(a,left,right);
@@ -19,7 +19,7 @@ public class QuickSort {
     }
 
     public void quickSort(int[] a ,int left,int right) {
-        if (left > right) return;
+        if (left >= right) return;
         int stand = a[left];
         int i = left;
         int j = right;
@@ -36,7 +36,7 @@ public class QuickSort {
         swap(a,left,j);
 
 
-        quickSort(a,0,i-1);
+        quickSort(a,0,j-1);
         quickSort(a,j+1,right);
     }
 
