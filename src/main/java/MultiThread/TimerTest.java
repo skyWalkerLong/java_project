@@ -1,4 +1,4 @@
-package scheduled;
+package MultiThread;
 
 import java.util.Timer;
 import java.util.TimerTask;
