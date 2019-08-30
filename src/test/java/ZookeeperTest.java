@@ -10,7 +10,7 @@ import org.apache.zookeeper.*;
 public class ZookeeperTest {
     public static void main(String[] args) throws Exception{
         // 创建连接
-        ZooKeeper zk = new ZooKeeper("39.26.11.146:2181", 30000, new Watcher(){
+        ZooKeeper zk = new ZooKeeper("39.96.11.146:2181", 30000, new Watcher(){
             // 监听的事件发生变化时, 调用该函数
             public void process(WatchedEvent event) {
                 System.out.println("Event emit -> " + event.getType());
