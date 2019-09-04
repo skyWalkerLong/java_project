@@ -10,9 +10,7 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  * @date 2019-09-04
  */
 public class ChangeableLock {
-    /**
-     * count就是同时允许访问的线程数
-     */
+
     private Sync sync;
 
     public ChangeableLock(int count) {
