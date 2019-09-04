@@ -1,18 +1,23 @@
 package MultiThread;
 
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
-import java.util.concurrent.locks.Lock;
 
 /**
- * 允许两个线程同时访问的同步组件
+ * 多样锁，随意控制同时有多少个线程获取锁
  *
  * @author Long Chao
  * @version 1.0
- * @date 2019-09-03
+ * @date 2019-09-04
  */
-public class TwinsLock {
+public class ChangeableLock {
+    /**
+     * count就是同时允许访问的线程数
+     */
+    private Sync sync;
 
-    private final Sync sync = new Sync(2);
+    public ChangeableLock(int count) {
+        sync = new Sync(count);
+    }
 
     private static final class Sync extends AbstractQueuedSynchronizer {
         Sync(int count) {
@@ -22,6 +27,11 @@ public class TwinsLock {
             setState(count);
         }
 
+        /**
+         * 共享锁要用shared
+         * @param reduceCount
+         * @return
+         */
         @Override
         public int tryAcquireShared(int reduceCount) {
             for(;;) {
