@@ -12,93 +12,20 @@ import java.util.Set;
  */
 public class test1 {
     public static void main(String[] args) {
-        int hour = 0;
-        int min = 0;
-        ArrayList<String> list = new ArrayList<>();
-        printX_AXIS(hour,min,list);
-        //printRANGE(hour,min,list);
-       // printTOTAL_RANGE(hour,min,list);
-
-//        int size = list.size();
-//        String[] strings = (String[]) list.toArray(new String[size]);
-//        System.out.println(Arrays.toString(strings));
+        System.out.println(climbStairs(4));
     }
 
-//    private static void interval5min(int hour,int min,ArrayList<String> list) {
-//        while (min < 60 && hour < 24) {
-//            if (min < 10) {
-//                list.add(hour + ":0" + min);
-//            } else {
-//                list.add(hour+":"+min);
-//            }
-//            min = min+5;
-//            if (min == 60) {
-//                min = 0;
-//                hour = hour+1;
-//            }
-//        }
-
-   private static void printX_AXIS(int hour,int min,ArrayList<String> list) {
-        while (min < 60 && hour < 24) {
-            if (min < 10) {
-                list.add(hour + ":0" + min);
-            } else {
-                list.add(hour+":"+min);
-            }
-            min = min+5;
-            if (min == 60) {
-                min = 0;
-                hour = hour+1;
-            }
+    public static int climbStairs(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
         }
 
-        list.forEach(i -> System.out.print('"'+i+'"'+","));
-    }
-
-    private static void printRANGE(int hour,int min,ArrayList<String> list) {
-        while (min < 60 && hour < 24) {
-            StringBuilder sb = new StringBuilder();
-            if(min < 10) {
-                sb.append(hour + ":0" + min + "~");
-            } else {
-                sb.append(hour + ":" + min + "~");
-            }
-            min = min +4;
-            if(min < 10) {
-                sb.append(hour + ":0" + min );
-            } else {
-                sb.append(hour + ":" + min );
-            }
-            list.add(sb.toString());
-            min = min + 1;
-            if (min == 60) {
-                min = 0;
-                hour = hour+1;
-            }
-
+        if (n == 3) {
+            return 4;
         }
-        list.forEach(i -> System.out.print('"'+i+'"'+","));
+        return climbStairs(n-1) + climbStairs(n-2) + climbStairs(n-3);
     }
-
-    private static void printTOTAL_RANGE(int hour,int min,ArrayList<String> list) {
-        while (min < 60 && hour < 24) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("0:00"+"~");
-            min = min +4;
-            if(min < 10) {
-                sb.append(hour + ":0" + min );
-            } else {
-                sb.append(hour + ":" + min );
-            }
-            list.add(sb.toString());
-            min = min + 1;
-            if (min == 60) {
-                min = 0;
-                hour = hour+1;
-            }
-
-        }
-        list.forEach(i -> System.out.print('"'+i+'"'+","));
-    }
-
 }
