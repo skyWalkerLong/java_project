@@ -23,7 +23,10 @@ public class NettyServer {
     public static void main(String[] args) {
         ServerBootstrap serverBootstrap = new ServerBootstrap();
 
+        //监听端口，创建新连接的线程组
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
+
+        //处理每一条连接数据读写的线程组
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
         serverBootstrap.group(bossGroup, workerGroup)
